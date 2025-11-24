@@ -1,52 +1,39 @@
-import Image from "next/image";
+import Header from "@/app/components/header";
+import GridLayout from "./components/grid_layout";
+import Button from "./components/button"
 
 export default function Home() {
-	return (
-		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-				<Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
-				<ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-					<li className="mb-2 tracking-[-.01em]">
-						Get started by editing{" "}
-						<code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-							src/app/page.tsx
-						</code>
-						.
-					</li>
-					<li className="tracking-[-.01em]">Save and see your changes instantly.</li>
-				</ol>
 
-				<div className="flex gap-4 items-center flex-col sm:flex-row">
-					<a
-						className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Read our docs
-					</a>
+	return (
+		<div className="p-10 min-h-full min-w-full flex flex-col justify-stretch">
+			<Header></Header>
+			<GridLayout className="gap-3 mt-10">
+				<div className="h-full w-full border-1"></div>
+
+				<div className="h-full w-full border-1 p-5">
+					<div className="flex flex-row justify-between">
+						<span className="text-xl font-mono border-b-1 border-black">about me</span>
+						<div className="flex flex-row gap-2">
+							<Button>cv</Button>
+							<Button>email</Button>
+							<Button>github</Button>
+						</div>
+					</div>
+					<p className="font-mono text-sm p-3">Lorem ipsum dolor sit amet</p>
 				</div>
-			</main>
-			<footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-					Learn
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-					Go to nextjs.org →
-				</a>
-			</footer>
+
+				<div className="h-full w-full border-1 p-5">
+					<span className="text-xl font-mono border-b-1 border-black">projects</span>
+					<div className="flex flex-row m-3 justify-stretch gap-5 flex-wrap">
+						<Button>boost-sms</Button>
+						<Button>nzpvt</Button>
+						<Button>pulsar</Button>
+
+					</div>
+				</div>
+
+				<div className="h-full w-full border-1"></div>
+			</GridLayout>
 		</div>
 	);
 }
