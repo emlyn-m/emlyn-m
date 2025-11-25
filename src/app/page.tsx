@@ -3,9 +3,26 @@ import GridLayout from "./components/grid_layout";
 import Button from "./components/button";
 import Wireframe from './components/wireframe';
 
+import { Vector3 } from 'three';
+
 import { LiaEnvelope, LiaGithub, LiaFilePdf, LiaLinkedinIn } from 'react-icons/lia';
 
 export default function Home() {
+
+	const PersonalInfoConfig = {
+		links: {
+			cv: './Emlyn_Matheson_Cirriculum_Vitae.pdf',
+			github: 'https://github.com/emlyn-m',
+			linkedin: './linkedin',
+			email: 'mailto:contact@emlyn.xyz',
+		},
+		title: "Emlyn Matheson (she/her) | Melbourne",
+		bullets: [
+			"Software dev",
+			"Recent Graduate",
+			"Hiring? Let's chat!"
+		]
+	}
 
 	const ProjectInfoConfig = [
 		{ name: "boost-sms", description: "Matrix proxy layer over TLS (Transport-Layer SMS)", link: "https://github.com/emlyn-m/boost" },
@@ -18,29 +35,27 @@ export default function Home() {
 			<Header></Header>
 			<GridLayout className="gap-3 mt-10 flex-1">
 				<div className="h-full w-full border-1">
-					<Wireframe />
+					<Wireframe scale={ 2 } pos={ new Vector3(0, -.1, 0) } objPath="./cat.obj" />
 				</div>
 
 				<div className="h-full w-full border-1 p-5">
 					<div className="flex flex-row justify-between flex-wrap gap-5 items-start">
 						<span className="text-xl font-mono border-b-1 border-black pl-[.5rem] pr-[.5rem] h-[1.8rem]">about me</span>
 						<div className="flex flex-row gap-2">
-							<Button href="./cv.txt" target="_blank">
+							<Button href={PersonalInfoConfig.links.cv} target="_blank">
 								<div> 
 									<span>CV</span>
 									<LiaFilePdf className="size-[1.6rem] inline" />
 								</div>
 							</Button>
-							<Button href="mailto:contact@emlyn.xyz"><LiaEnvelope className="w-[1.6rem] h-[1.6rem]"/></Button>
-							<Button href="linkedin"><LiaLinkedinIn className="w-[1.6rem] h-[1.6rem]" /></Button>
-							<Button href="https://github.com/emlyn-m" target="_blank"><LiaGithub className="w-[1.6rem] h-[1.6rem]" /></Button>
+							<Button href={PersonalInfoConfig.links.email}><LiaEnvelope className="w-[1.6rem] h-[1.6rem]"/></Button>
+							<Button href={PersonalInfoConfig.links.linkedin}><LiaLinkedinIn className="w-[1.6rem] h-[1.6rem]" /></Button>
+							<Button href={PersonalInfoConfig.links.github} target="_blank"><LiaGithub className="w-[1.6rem] h-[1.6rem]" /></Button>
 						</div>
 					</div>
 					<div className="font-mono text-sm p-3">
-						<p className="font-bold">Emlyn Matheson (she/her) | Melbourne</p><br />
-						<p>· Software dev</p>
-						<p>· Recent Graduate</p>
-						<p>· Hiring? Let's chat!</p>
+						<p className="font-bold">{PersonalInfoConfig.title}</p><br />
+						{ PersonalInfoConfig.bullets.map((x,i) => (<p key={`personal-bullet-${i}`}>• {x}</p>)) }
 					</div>
 				</div>
 

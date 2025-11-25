@@ -12,20 +12,32 @@ import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 
 import { SobelShader } from './SobelShader.js';
 
-async function configureRenderer(sceneRef: HTMLDivElement|null) {
+
+export interface WireframeProps {
+    scale: number;
+    pos: THREE.Vector3;
+    objPath: string;
+}
+
+async function configureRenderer(sceneRef: HTMLDivElement|null, props: WireframeProps) {
     if (!sceneRef) { return; }
 
     let width = sceneRef.clientWidth;
     let height = sceneRef.clientHeight;
     const camera = new THREE.PerspectiveCamera( 100, width / height, 0.01, 10 );
     camera.position.z = 1;
+    camera.position.y = .5;
+    camera.rotation.x = -3.14/16;
 
     const scene = new THREE.Scene();
-    const geometry = new THREE.BoxGeometry( 0.7, .7, .7 );
-    const material = new THREE.MeshNormalMaterial(); 
     scene.background = new THREE.Color(0xffffff); 
-    const _mesh = new THREE.Mesh( geometry, material ); 
+
+    const loader = new OBJLoader();
+    const _mesh = await loader.loadAsync( props.objPath );
     scene.add( _mesh );
+    _mesh.position.set(...props.pos);    
+    _mesh.scale.set(props.scale, props.scale, props.scale);
+
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setSize( width, height );
       
@@ -37,7 +49,7 @@ async function configureRenderer(sceneRef: HTMLDivElement|null) {
     composer.addPass(lumaPass);
     
     const sobelPass = new ShaderPass( SobelShader );
-    sobelPass.uniforms.resolution.value.set(width, height);
+    sobelPass.uniforms.resolution.value.set(5*width, 5*height);
     composer.addPass( sobelPass )
 
     const asciiMaterial = new THREE.ShaderMaterial( {
@@ -62,16 +74,17 @@ async function configureRenderer(sceneRef: HTMLDivElement|null) {
                 return .7 * color.r + .2 * color.g + .1 * color.b;
             }
 
-            float renderAngle(vec2 angle, vec2 pos) {
+            int fragFallsOnAngle(vec2 angle, vec2 pos) {
 
                 const float margin = 0.1;
-                if (pos.x < margin || pos.y < margin) { return 1.0; }
+                if (pos.x < margin || pos.y < margin) { return 0; }
+                if (pos.x > (1.0-margin) || pos.y > (1.0-margin)) { return 0; }
 
                 pos -= vec2(0.5, 0.5);
                 float adot = abs((pos.x * angle.x) + (pos.y * angle.y));
-                if (adot < .1) { return 0.0; }
+                if (adot < .1) { return 1; }
 
-                return 1.0;
+                return 0;
             }
 
 
@@ -103,9 +116,11 @@ async function configureRenderer(sceneRef: HTMLDivElement|null) {
 
                 if (sampled_angle.r > 0.0) { sampled_angle /= sampled_angle.r; }
                 else { gl_FragColor = vec4(1,1,1,1); return; }
-
-                float rendered_color = renderAngle(vec2(sampled_angle.g, sampled_angle.b), vec2(offset_x, offset_y));
-                gl_FragColor = vec4(rendered_color, rendered_color, rendered_color, 1.0);
+                
+                int should_render = fragFallsOnAngle(vec2(sampled_angle.g, sampled_angle.b), vec2(offset_x, offset_y));
+                vec3 color = float(should_render) * sampled_angle;
+                
+                gl_FragColor = vec4(vec3(1.0, 1.0, 1.0) - color, 1.0);
             }
         `
     } );
@@ -116,25 +131,29 @@ async function configureRenderer(sceneRef: HTMLDivElement|null) {
     composer.addPass( outputPass );
 
     function animate(time: any) {
-
-        _mesh.rotation.x = time / 1000;
         _mesh.rotation.y = time / 2000;
 
         composer.render();
     }
     renderer.setAnimationLoop( animate );
 
-    sceneRef.replaceWith( renderer.domElement );
+    sceneRef.replaceChildren( renderer.domElement );
 }
 
-export default function Wireframe() {
+
+export default function Wireframe(props: WireframeProps) {
 
     let [ sceneRef, setSceneRef ] = useState<HTMLDivElement|null>(null);
     let [ renderConfigured, setRenderConfigured ] = useState<boolean>(false);
-    if (sceneRef && !renderConfigured ) { configureRenderer(sceneRef); setRenderConfigured(true); }
+
+
+    if (sceneRef && !renderConfigured ) { 
+        configureRenderer(sceneRef, {...props, scale: props.scale * Math.min((sceneRef.clientWidth / 497), (sceneRef.clientHeight / 359))}); 
+        setRenderConfigured(true); 
+    }
 
 
     return (
-        <div ref={ newRef => setSceneRef(newRef) } className="bg-cyan-100 w-full h-full"></div>
+        <div ref={ newRef => setSceneRef(newRef) } className="w-full h-full overflow-hidden"></div>
     )
 }
