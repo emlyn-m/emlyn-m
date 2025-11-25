@@ -3,8 +3,6 @@ import GridLayout from "./components/grid_layout";
 import Button from "./components/button";
 import Wireframe from './components/wireframe';
 
-import { Vector3 } from 'three';
-
 import { LiaEnvelope, LiaGithub, LiaFilePdf, LiaLinkedinIn } from 'react-icons/lia';
 
 export default function Home() {
@@ -35,7 +33,7 @@ export default function Home() {
 			<Header></Header>
 			<GridLayout className="gap-3 mt-10 flex-1">
 				<div className="h-full w-full border-1">
-					<Wireframe scale={ 2.4 } pos={ new Vector3(0, -.1, 0) } objPath="./cat.obj" />
+					<Wireframe scale={ 2.4 } pos={ [0, -.1, 0] } objPath="./cat.obj" />
 				</div>
 
 				<div className="h-full w-full border-1 p-5">

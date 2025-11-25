@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Ref, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import * as THREE from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -15,15 +15,15 @@ import { SobelShader } from './SobelShader.js';
 
 export interface WireframeProps {
     scale: number;
-    pos: THREE.Vector3;
+    pos: number[];
     objPath: string;
 }
 
 async function configureRenderer(sceneRef: HTMLDivElement|null, props: WireframeProps) {
     if (!sceneRef) { return; }
 
-    let width = sceneRef.clientWidth;
-    let height = sceneRef.clientHeight;
+    const width = sceneRef.clientWidth;
+    const height = sceneRef.clientHeight;
     const camera = new THREE.PerspectiveCamera( 100, width / height, 0.01, 10 );
     camera.position.z = 1;
     camera.position.y = .5;
@@ -35,7 +35,7 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     const loader = new OBJLoader();
     const _mesh = await loader.loadAsync( props.objPath );
     scene.add( _mesh );
-    _mesh.position.set(...props.pos);    
+    _mesh.position.set(props.pos[0], props.pos[1], props.pos[2]);
     _mesh.scale.set(props.scale, props.scale, props.scale);
 
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -130,7 +130,7 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     const outputPass = new OutputPass();
     composer.addPass( outputPass );
 
-    function animate(time: any) {
+    function animate(time: number) {
         _mesh.rotation.y = time / 2000;
 
         composer.render();
@@ -143,8 +143,8 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
 
 export default function Wireframe(props: WireframeProps) {
 
-    let [ sceneRef, setSceneRef ] = useState<HTMLDivElement|null>(null);
-    let [ renderConfigured, setRenderConfigured ] = useState<boolean>(false);
+    const [ sceneRef, setSceneRef ] = useState<HTMLDivElement|null>(null);
+    const [ renderConfigured, setRenderConfigured ] = useState<boolean>(false);
 
 
     if (sceneRef && !renderConfigured ) { 
