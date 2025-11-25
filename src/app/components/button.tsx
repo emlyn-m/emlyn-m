@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 export interface ButtonProps {
     className?: string,
-    children?: string,
+    children?: string|ReactElement,
     href?: string,
     target?: string,
 }
