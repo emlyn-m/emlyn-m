@@ -41,9 +41,9 @@ export default function Home() {
 						<span className="text-xl font-mono border-b-1 border-black pl-[.5rem] pr-[.5rem] h-[1.8rem]">about me</span>
 						<div className="flex flex-row gap-2">
 							<Button href={PersonalInfoConfig.links.cv} target="_blank">
-								<div> 
-									<span>CV</span>
-									<LiaFilePdf className="size-[1.6rem] inline" />
+								<div className="flex flex-row items-center"> 
+									<span className="font-mono font-bold">CV</span>
+									<LiaFilePdf className="size-[1.6rem]" />
 								</div>
 							</Button>
 							<Button href={PersonalInfoConfig.links.email}><LiaEnvelope className="w-[1.6rem] h-[1.6rem]"/></Button>
