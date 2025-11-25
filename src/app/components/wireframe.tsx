@@ -49,7 +49,7 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     composer.addPass(lumaPass);
     
     const sobelPass = new ShaderPass( SobelShader );
-    sobelPass.uniforms.resolution.value.set(5*width, 5*height);
+    sobelPass.uniforms.resolution.value.set(width, height);
     composer.addPass( sobelPass )
 
     const asciiMaterial = new THREE.ShaderMaterial( {
@@ -89,10 +89,10 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
 
 
             void main() {
-
-
                 const int cell_size_px = 5;
-                const float threshold = .1;
+                const float threshold = -0.5;
+
+                const int cells_margin = 1;
 
                 int ncells_x = int(resolution.x) / cell_size_px;
                 int ncells_y = int(resolution.y) / cell_size_px;
@@ -104,12 +104,12 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
                 float offset_y = float(int(vUv.y * resolution.y) - (qpos_y * cell_size_px)) / float(cell_size_px);
 
                 vec3 sampled_angle = vec3(0,0,0);
-                for (int i=0; i < cell_size_px; i++) {
-                    for (int j=0; j < cell_size_px; j++) {
+                for (int i=cells_margin; i < cell_size_px-cells_margin; i++) {
+                    for (int j=cells_margin; j < cell_size_px-cells_margin; j++) {
                         vec2 sample_point = vec2((float(qpos_x) + (float(i)/float(cell_size_px))) / float(ncells_x), (float(qpos_y) + (float(j)/float(cell_size_px))) / float(ncells_y));
                         vec3 csample = texture2D(tDiffuse, sample_point).rgb;
                         if (csample.r > threshold) {
-                            sampled_angle = csample.rgb;
+                            sampled_angle += csample.rgb;
                         }
                     }
                 }

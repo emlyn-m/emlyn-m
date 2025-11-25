@@ -35,7 +35,7 @@ export default function Home() {
 			<Header></Header>
 			<GridLayout className="gap-3 mt-10 flex-1">
 				<div className="h-full w-full border-1">
-					<Wireframe scale={ 2 } pos={ new Vector3(0, -.1, 0) } objPath="./cat.obj" />
+					<Wireframe scale={ 2.4 } pos={ new Vector3(0, -.1, 0) } objPath="./cat.obj" />
 				</div>
 
 				<div className="h-full w-full border-1 p-5">
