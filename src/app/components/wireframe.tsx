@@ -137,6 +137,25 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     }
     renderer.setAnimationLoop( animate );
 
+    window.addEventListener('resize', () => {
+
+        const newWidth = sceneRef.clientWidth;
+        const newHeight = sceneRef.clientHeight;
+
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+        sobelPass.uniforms.resolution.value.set(newWidth, newHeight);
+        asciiPass.uniforms.resolution.value.set(newWidth, newHeight);
+        renderer.setSize(width, height);
+        console.log(_mesh.scale);
+
+        renderer.domElement.style.width = `${newWidth}px`;
+        renderer.domElement.style.height = `${newHeight}px`;
+        renderer.domElement.style.border = '10px solid red !important;';
+        
+
+    }, false);
+
     sceneRef.replaceChildren( renderer.domElement );
 }
 
@@ -148,7 +167,8 @@ export default function Wireframe(props: WireframeProps) {
 
 
     if (sceneRef && !renderConfigured ) { 
-        configureRenderer(sceneRef, {...props, scale: props.scale * Math.min((sceneRef.clientWidth / 497), (sceneRef.clientHeight / 359))}); 
+        //...props, scale: props.scale * Math.min((sceneRef.clientWidth / 497), (sceneRef.clientHeight / 359))
+        configureRenderer(sceneRef, props); 
         setRenderConfigured(true); 
     }
 
