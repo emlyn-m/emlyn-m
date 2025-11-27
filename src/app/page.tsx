@@ -31,7 +31,7 @@ export default function Home() {
 	return (
 		<div className="p-10 min-h-full min-w-full flex flex-col justify-stretch">
 			<Header></Header>
-			<GridLayout className="gap-3 mt-10 flex-1">
+			<GridLayout className="gap-5 mt-10 flex-1">
 				<div className="h-full w-full border-1 flex-1">
 					<Wireframe scale={ 2.4 } pos={ [0, -.1, 0] } objPath="./cat.obj" />
 				</div>
