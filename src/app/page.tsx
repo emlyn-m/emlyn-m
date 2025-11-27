@@ -24,8 +24,8 @@ export default function Home() {
 
 	const ProjectInfoConfig = [
 		{ name: "boost-sms", description: "Matrix proxy layer over TLS (Transport-Layer SMS)", link: "https://github.com/emlyn-m/boost" },
-		{ name: "Uni Capstone", description: "Real-time controlled display screen for automatic YouTube videos and external media, local zero-trust with Google OAuth", link: "https://github.com/akiya-7/terrain-it-project" },
 		{ name: "pulsar", description: "Custom server monitoring app for Android with communication over XMPP", link: "https://github.com/emlyn-m/pulsar" },
+		{ name: "Uni Capstone", description: "Real-time controlled display screen for automatic YouTube videos and external media, local zero-trust with Google OAuth", link: "https://github.com/akiya-7/terrain-it-project" },
 	]
 
 	return (
@@ -65,9 +65,9 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="h-min w-full border-1 p-5 flex flex-col gap-4 h-min">
+				<div className="h-full w-full border-1 p-5 flex flex-col gap-4">
 					<span className="text-xl font-mono border-b-1 border-black w-min pl-[.5rem] pr-[.5rem]">projects</span>
-					<div className="m-3 gap-5 landscape:grid landscape:grid-cols-2 landscape:grid-rows-2 portrait:flex portrait:flex-col h-min">
+					<div className="m-3 gap-5 landscape:grid landscape:grid-cols-3 landscape:grid-rows-1 portrait:flex portrait:flex-col h-full">
 						{ ProjectInfoConfig.map((proj, i) => (
 							<Button className="p-2 flex-1" href={ proj.link } key={`proj-${i}`}>
 								<div className="flex flex-col p-3">
