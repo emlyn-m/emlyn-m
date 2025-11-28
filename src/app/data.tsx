@@ -2,7 +2,7 @@ export const PersonalInfoConfig = {
     links: {
         cv: "./EMLYN_MATHESON-Cirriculum_Vitae.pdf",
         github: "https://github.com/emlyn-m",
-        linkedin: "./linkedin",
+        linkedin: "https://www.linkedin.com/in/emlyn-matheson-489aa9280/",
         email: "mailto:contact@emlyn.xyz",
     },
     title: "Emlyn Matheson (she/her) | Melbourne",
