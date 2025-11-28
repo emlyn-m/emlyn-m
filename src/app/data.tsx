@@ -1,6 +1,6 @@
 export const PersonalInfoConfig = {
     links: {
-        cv: "./Emlyn_Matheson_Cirriculum_Vitae.pdf",
+        cv: "./EMLYN_MATHESON-Cirriculum_Vitae.pdf",
         github: "https://github.com/emlyn-m",
         linkedin: "./linkedin",
         email: "mailto:contact@emlyn.xyz",
