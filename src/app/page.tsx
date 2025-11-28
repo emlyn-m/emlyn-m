@@ -2,39 +2,12 @@ import Header from "@/app/components/header";
 import GridLayout from "./components/grid_layout";
 import Button from "./components/button";
 import Wireframe from './components/wireframe';
+import { ModelConfig, PersonalInfoConfig, ProjectInfoConfig } from './data';
 
 import { LiaEnvelope, LiaGithub, LiaFilePdf, LiaLinkedinIn } from 'react-icons/lia';
 
 export default function Home() {
 
-	const PersonalInfoConfig = {
-		links: {
-			cv: './Emlyn_Matheson_Cirriculum_Vitae.pdf',
-			github: 'https://github.com/emlyn-m',
-			linkedin: './linkedin',
-			email: 'mailto:contact@emlyn.xyz',
-		},
-		title: "Emlyn Matheson (she/her) | Melbourne",
-		bullets: [
-			"Software dev",
-			"Recent Graduate",
-			"Hiring? Let's chat!"
-		]
-	};
-
-	const ProjectInfoConfig = [
-		{ name: "boost-sms", description: "Matrix proxy layer over TLS (Transport-Layer SMS)", link: "https://github.com/emlyn-m/boost" },
-		{ name: "pulsar", description: "Custom server monitoring app for Android with communication over XMPP", link: "https://github.com/emlyn-m/pulsar" },
-		{ name: "Uni Capstone", description: "Real-time controlled display screen for automatic YouTube videos and external media, local zero-trust with Google OAuth\n\nCode not available.", link: "" },
-	];
-
-	const ModelConfig = {
-		path: "cat/source/scene.gltf",
-		pos: [-.1, -.2, 0],
-		scale: 0.06,
-		author: "mark2580",
-		authorLink: "https://sketchfab.com/3d-models/cat-murdered-soul-suspect-836312def1b84e588866500a2bf79f0f",
-	};
 
 	return (
 		<div className="p-10 min-h-full min-w-full flex flex-col justify-stretch">
@@ -78,8 +51,9 @@ export default function Home() {
 
 				<div className="h-full w-full border-1 p-5 flex flex-col gap-4">
 					<span className="text-xl font-mono border-b-1 border-black w-min pl-[.5rem] pr-[.5rem]">projects</span>
-					<div className="m-3 gap-5 landscape:grid landscape:grid-cols-3 landscape:grid-rows-1 portrait:flex portrait:flex-col h-full">
-						{ ProjectInfoConfig.map((proj, i) => (
+					<div className="m-3 gap-5 landscape:grid landscape:grid-cols-3 landscape:grid-rows-1 portrait:flex portrait:flex-col h-full"
+						style={{gridTemplateColumns: `repeat(${ProjectInfoConfig.projectCols}, 1fr)`, gridTemplateRows: `repeat(${ProjectInfoConfig.projectRows}, 1fr`}} >
+						{ ProjectInfoConfig.projects.map((proj, i) => (
 							<Button className="p-2 flex-1" href={ proj.link } key={`proj-${i}`}>
 								<div className="flex flex-col p-3">
 									<p className="font-bold"> { proj.name } </p>
