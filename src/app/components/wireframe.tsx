@@ -7,7 +7,6 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import { LuminosityShader } from 'three/addons/shaders/LuminosityShader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 import { SobelShader } from './SobelShader.js';
@@ -85,8 +84,8 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     const outputPass = new OutputPass();
     composer.addPass( outputPass );
 
-    function animate(_time: number) {
-        var delta = clock.getDelta();
+    function animate() {
+        const delta = clock.getDelta();
   
         if ( mixer ) mixer.update( delta );
 

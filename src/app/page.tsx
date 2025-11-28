@@ -2,12 +2,11 @@ import Header from "@/app/components/header";
 import GridLayout from "./components/grid_layout";
 import Button from "./components/button";
 import Wireframe from './components/wireframe';
-import { ModelConfig, PersonalInfoConfig, ProjectInfoConfig } from './data';
 
+import { ModelConfig, PersonalInfoConfig, ProjectConfig } from './data';
 import { LiaEnvelope, LiaGithub, LiaFilePdf, LiaLinkedinIn } from 'react-icons/lia';
 
 export default function Home() {
-
 
 	return (
 		<div className="p-10 min-h-full min-w-full flex flex-col justify-stretch">
@@ -52,7 +51,7 @@ export default function Home() {
 				<div className="h-full w-full border-1 p-5 flex flex-col gap-4">
 					<span className="text-xl font-mono border-b-1 border-black w-min pl-[.5rem] pr-[.5rem]">projects</span>
 					<div className="m-3 gap-5 flex landscape:flex-row portrait:flex-col h-full">
-						{ ProjectInfoConfig.projects.map((proj, i) => (
+						{ ProjectConfig.projects.map((proj:Project_t, i:number) => (
 							<Button className="p-2 flex-1" href={ proj.link } key={`proj-${i}`}>
 								<div className="flex flex-col p-3">
 									<p className="font-bold"> { proj.name } </p>
