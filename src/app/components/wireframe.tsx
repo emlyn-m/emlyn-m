@@ -8,7 +8,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { LuminosityShader } from 'three/addons/shaders/LuminosityShader.js';
-import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 import { SobelShader } from './SobelShader.js';
 import { VertexId } from './shaders/vertex_shader';
@@ -19,6 +19,7 @@ export interface WireframeProps {
     scale: number;
     pos: number[];
     objPath: string;
+    className?: string;
 }
 
 async function configureRenderer(sceneRef: HTMLDivElement|null, props: WireframeProps) {
@@ -34,11 +35,18 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff); 
 
-    const loader = new OBJLoader();
-    const _mesh = await loader.loadAsync( props.objPath );
-    scene.add( _mesh );
-    _mesh.position.set(props.pos[0], props.pos[1], props.pos[2]);
-    _mesh.scale.set(props.scale, props.scale, props.scale);
+    const clock = new THREE.Clock();
+    const loader = new GLTFLoader();
+    const _model = (await loader.loadAsync( props.objPath ));
+    const model = _model.scene
+    scene.add( model );
+    model.position.set(props.pos[0], props.pos[1], props.pos[2]);
+    model.scale.set(props.scale, props.scale, props.scale);
+
+    const mixer = new THREE.AnimationMixer( model );
+    _model.animations.forEach( ( clip ) => {
+        mixer.clipAction( clip ).play();
+    } );
 
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setSize( width, height );
@@ -46,13 +54,10 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     const composer = new EffectComposer( renderer );
     const renderPass = new RenderPass( scene, camera );
     composer.addPass( renderPass );
-
-    const lumaPass = new ShaderPass(LuminosityShader);
-    composer.addPass(lumaPass);
     
     const sobelPass = new ShaderPass( SobelShader );
     sobelPass.uniforms.resolution.value.set(width, height);
-    composer.addPass( sobelPass )
+    composer.addPass( sobelPass );
 
     const quantizeMaterial = new THREE.ShaderMaterial( {
         uniforms: {
@@ -80,8 +85,10 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     const outputPass = new OutputPass();
     composer.addPass( outputPass );
 
-    function animate(time: number) {
-        _mesh.rotation.y = time / 2000;
+    function animate(_time: number) {
+        var delta = clock.getDelta();
+  
+        if ( mixer ) mixer.update( delta );
 
         composer.render();
     }
@@ -98,10 +105,9 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
         quantizePass.uniforms.resolution.value.set(newWidth, newHeight);
         asciiPass.uniforms.resolution.value.set(newWidth, newHeight);
         renderer.setSize(width, height);
-        console.log(_mesh.scale);
 
-        renderer.domElement.style.width = `${newWidth}px`;
-        renderer.domElement.style.height = `${newHeight}px`;
+        renderer.domElement.style.width = '1px';//`${newWidth}px`;
+        renderer.domElement.style.height = `'1px';//${newHeight}px`;
         renderer.domElement.style.border = '10px solid red !important;';
         
 
@@ -125,6 +131,6 @@ export default function Wireframe(props: WireframeProps) {
 
 
     return (
-        <div ref={ newRef => setSceneRef(newRef) } className="w-full h-full overflow-hidden"></div>
+        <div ref={ newRef => setSceneRef(newRef) } className={`w-full h-full overflow-hidden ${props.className}`}></div>
     )
 }

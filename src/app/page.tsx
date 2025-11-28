@@ -20,20 +20,31 @@ export default function Home() {
 			"Recent Graduate",
 			"Hiring? Let's chat!"
 		]
-	}
+	};
 
 	const ProjectInfoConfig = [
 		{ name: "boost-sms", description: "Matrix proxy layer over TLS (Transport-Layer SMS)", link: "https://github.com/emlyn-m/boost" },
 		{ name: "pulsar", description: "Custom server monitoring app for Android with communication over XMPP", link: "https://github.com/emlyn-m/pulsar" },
-		{ name: "Uni Capstone", description: "Real-time controlled display screen for automatic YouTube videos and external media, local zero-trust with Google OAuth", link: "https://github.com/akiya-7/terrain-it-project" },
-	]
+		{ name: "Uni Capstone", description: "Real-time controlled display screen for automatic YouTube videos and external media, local zero-trust with Google OAuth\n\nCode not available.", link: "" },
+	];
+
+	const ModelConfig = {
+		path: "cat/source/scene.gltf",
+		pos: [-.1, -.2, 0],
+		scale: 0.06,
+		author: "mark2580",
+		authorLink: "https://sketchfab.com/3d-models/cat-murdered-soul-suspect-836312def1b84e588866500a2bf79f0f",
+	};
 
 	return (
 		<div className="p-10 min-h-full min-w-full flex flex-col justify-stretch">
 			<Header></Header>
 			<GridLayout className="gap-5 mt-10 flex-1">
-				<div className="h-full w-full border-1 flex-1">
-					<Wireframe scale={ 2.4 } pos={ [0, -.1, 0] } objPath="./cat.obj" />
+				<div className="h-full w-full relative border-1">
+					<Wireframe className="absolute" scale={ ModelConfig.scale } pos={ ModelConfig.pos } objPath={ ModelConfig.path } />
+					<div className="self-right absolute bottom-3 right-3">
+						<Button className="p-3 text-xs" href={ ModelConfig.authorLink }><p>model + animation: <b>{ ModelConfig.author }</b></p></Button>
+					</div>
 				</div>
 
 				<div className="h-full w-full border-1 p-5">
@@ -72,7 +83,7 @@ export default function Home() {
 							<Button className="p-2 flex-1" href={ proj.link } key={`proj-${i}`}>
 								<div className="flex flex-col p-3">
 									<p className="font-bold"> { proj.name } </p>
-									<p className="font-mono text-[.9rem] p-2 text-wrap">{ proj.description }</p>
+									<pre className="font-mono text-[.9rem] p-2 text-wrap">{ proj.description }</pre>
 								</div>
 							</Button>
 						

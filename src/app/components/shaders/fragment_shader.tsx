@@ -4,6 +4,8 @@ export const FragQuantize = `
     uniform vec2 resolution;
 
     void main() {
+        const float THRESHOLD = 0.6;
+
         const int cell_size_px = 5;
         const int cells_margin = 1;
 
@@ -25,7 +27,7 @@ export const FragQuantize = `
             }
         }
 
-        if (sampled_angle.r == 0.0) {
+        if (sampled_angle.r < THRESHOLD) {
             gl_FragColor = vec4(0.0,0.0,0.0,0.0);
             return;
         }
