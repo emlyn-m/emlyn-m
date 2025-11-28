@@ -7,7 +7,6 @@ import { ModelConfig, PersonalInfoConfig, ProjectConfig } from './data';
 import { LiaEnvelope, LiaGithub, LiaFilePdf, LiaLinkedinIn } from 'react-icons/lia';
 
 export default function Home() {
-
 	return (
 		<div className="p-10 min-h-full min-w-full flex flex-col justify-stretch">
 			<Header></Header>
