@@ -94,7 +94,7 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
     renderer.setAnimationLoop( animate );
 
     window.addEventListener('resize', () => {
-
+        while (!sceneRef) { console.log('halt'); }
         const newWidth = sceneRef.clientWidth;
         const newHeight = sceneRef.clientHeight;
 
@@ -105,8 +105,8 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
         asciiPass.uniforms.resolution.value.set(newWidth, newHeight);
         renderer.setSize(width, height);
 
-        renderer.domElement.style.width = '1px';//`${newWidth}px`;
-        renderer.domElement.style.height = `'1px';//${newHeight}px`;
+        renderer.domElement.style.width = `${newWidth}px`;
+        renderer.domElement.style.height = `${newHeight}px`;
         renderer.domElement.style.border = '10px solid red !important;';
         
 
