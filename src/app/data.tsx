@@ -18,9 +18,7 @@ export const ProjectInfoConfig = {
         { name: "boost-sms", description: "Matrix proxy layer over TLS (Transport-Layer SMS)", link: "https://github.com/emlyn-m/boost" },
         { name: "pulsar", description: "Custom server monitoring app for Android with communication over XMPP", link: "https://github.com/emlyn-m/pulsar" },
         { name: "Uni Capstone", description: "Real-time controlled display screen for automatic YouTube videos and external media, local zero-trust with Google OAuth\n\nCode not available.", link: "" },
-    ],
-    projectRows: 1,
-    projectCols: 3,
+    ]
 };
 
 export const ModelConfig = {

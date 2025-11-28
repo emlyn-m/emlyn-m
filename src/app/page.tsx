@@ -51,8 +51,7 @@ export default function Home() {
 
 				<div className="h-full w-full border-1 p-5 flex flex-col gap-4">
 					<span className="text-xl font-mono border-b-1 border-black w-min pl-[.5rem] pr-[.5rem]">projects</span>
-					<div className="m-3 gap-5 landscape:grid landscape:grid-cols-3 landscape:grid-rows-1 portrait:flex portrait:flex-col h-full"
-						style={{gridTemplateColumns: `repeat(${ProjectInfoConfig.projectCols}, 1fr)`, gridTemplateRows: `repeat(${ProjectInfoConfig.projectRows}, 1fr`}} >
+					<div className="m-3 gap-5 flex landscape:flex-row portrait:flex-col h-full">
 						{ ProjectInfoConfig.projects.map((proj, i) => (
 							<Button className="p-2 flex-1" href={ proj.link } key={`proj-${i}`}>
 								<div className="flex flex-col p-3">
