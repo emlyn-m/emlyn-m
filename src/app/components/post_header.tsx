@@ -1,7 +1,7 @@
 import Button from "./button";
 
 export interface PostHeaderProps {
-    name: string,
+    title: string,
 }
 
 export default function PostHeader(props: PostHeaderProps) {
@@ -11,7 +11,7 @@ export default function PostHeader(props: PostHeaderProps) {
                 <img src='/logo-transparent.svg' />
             </Button>
             <div className="w-[1px] h-[2rem] bg-black"></div>
-            <h1 className='text-[1.5rem] leading-[1.333] font-bold font-mono'>{ props.name }</h1>
+            <h1 className='text-[1.5rem] leading-[1.333] font-bold font-mono'>{ props.title }</h1>
 
             <span className="flex-1 text-end font-mono font-light text-xs cursor-default select-none">© 2025</span>
         </div>

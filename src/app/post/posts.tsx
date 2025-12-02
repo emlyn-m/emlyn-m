@@ -1,9 +1,11 @@
 import { ReactElement } from 'react';
+import { CapstonePost } from './post_capstone';
 
 export interface IPost {
-    name: string,
+    title: string,
     contents: ReactElement
 }
 
 export const Posts: Record<string, IPost> = {
+    'capstone-project': CapstonePost,
 }
