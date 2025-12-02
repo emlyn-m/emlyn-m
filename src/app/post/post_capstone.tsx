@@ -71,7 +71,7 @@ function RenderCapstonePost(): ReactElement {
                         While the display of uploaded files and YouTube videos was relatively simple, external websites were significantly more challenging. We needed to render them inside our website to allow for switching display modes, which meant using an iframe. Unfortunately, most websites send <Code>X-Frame-Options</Code> and <Code>CORS</Code> headers which restrict display in iframes (bummer!). 
                     </p>
                     <p className="text-s pl-4 pr-4 indent-4">
-                        To work around these limitations, we developed a simple forward proxy to run locally. This proxy would receive the requested domain name as a subdomain on localhost (eg: google.com.localhost:3000/path), fetch it, and return the response (after stripping the relevant headers and rewriting any Set-Cookie headers). Supplying the target domain as a subdomain was necessary to ensure that relative paths worked correctly.
+                        To work around these limitations, we developed a simple forward proxy to run locally. This proxy would receive the requested domain name as a subdomain on localhost (eg: <Code>google.com.localhost:3000/path</Code>), fetch it, and return the response (after stripping the relevant headers and rewriting any <Code>Set-Cookie</Code> headers). Supplying the target domain as a subdomain was necessary to ensure that relative paths worked correctly.
                     </p>
                 </div>
                 <FitImg fitTo={ webRef } src="/assets-capstone/dashboard-full.webp" className='w-min h-min border-1 p-3 box-border' />
