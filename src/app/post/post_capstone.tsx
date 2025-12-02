@@ -84,7 +84,7 @@ function RenderCapstonePost(): ReactElement {
                     </p>
 
                     <p className="text-s pl-4 pr-4 indent-4">
-                        nb-2
+                        The noticeboard display, when running, loops through all posts that are flagged to be shown, and an admin is able to archive or unarchive posts at any time.
                     </p>
 
                 </div>
