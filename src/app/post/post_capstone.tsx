@@ -45,11 +45,11 @@ function RenderCapstonePost(): ReactElement {
                     </div>
 
                 </div>
-                <FitImg fitTo={ bgFeatRef } src="/assets-capstone/screen-real.webp" className='w-min h-min border-1 p-3 box-border' />
+                <FitImg fitTo={ bgFeatRef } src="/assets-capstone/screen-real.png" className='w-min h-min border-1 p-3 box-border' />
             </div>
 
             <div className="flex landscape:flex-row portrait:flex-col gap-5">
-                <FitImg fitTo={ noticeboardRef } src="/assets-capstone/noticeboard.webp" className='w-min h-min border-1 p-3 box-border portrait:w-full min-h-[200px]' />
+                <FitImg fitTo={ noticeboardRef } src="/assets-capstone/noticeboard.png" className='w-min h-min border-1 p-3 box-border portrait:w-full min-h-[200px]' />
                 <div ref={ noticeboardRef } className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
                     <h2 className="font-bold">Community Noticeboard</h2>
                     <p className="text-s pl-4 pr-4 indent-4">
@@ -57,7 +57,7 @@ function RenderCapstonePost(): ReactElement {
                     </p>
 
                     <p className="text-s pl-4 pr-4 indent-4">
-                        The noticeboard display, when running, loops through all posts that are flagged to be shown, and an admin is able to archive or unarchive posts at any time.
+                        The noticeboard display, when running, loops through all posts that are flagged to be shown, and an admin is able to archive or redisplay posts at any time.
                     </p>
 
                 </div>
@@ -65,23 +65,25 @@ function RenderCapstonePost(): ReactElement {
 
 
             <div className="flex landscape:flex-row portrait:flex-col-reverse gap-5">
-                <div ref={ webRef } className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
-                    <h2 className="font-bold">External Websites</h2>
-                    <p className="text-s pl-4 pr-4 indent-4">
-                        While the display of uploaded files and YouTube videos was relatively simple, external websites were significantly more challenging. We needed to render them inside our website to allow for switching display modes, which meant using an iframe. Unfortunately, most websites send <Code>X-Frame-Options</Code> and <Code>CORS</Code> headers which restrict display in iframes (bummer!). 
-                    </p>
-                    <p className="text-s pl-4 pr-4 indent-4">
-                        To work around these limitations, we developed a simple forward proxy to run locally. This proxy would receive the requested domain name as a subdomain on localhost (eg: <Code>google.com.localhost:3000/path</Code>), fetch it, and return the response (after stripping the relevant headers and rewriting any <Code>Set-Cookie</Code> headers). Supplying the target domain as a subdomain was necessary to ensure that relative paths worked correctly.
-                    </p>
-                </div>
-                <FitImg fitTo={ webRef } src="/assets-capstone/dashboard-full.webp" className='w-min h-min border-1 p-3 box-border' />
-            </div>
+                <div className="flex flex-col gap-5" ref={ webRef }>
+                    <div className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
+                        <h2 className="font-bold">External Websites</h2>
+                        <p className="text-s pl-4 pr-4 indent-4">
+                            While the display of uploaded files and YouTube videos was relatively simple, external websites were significantly more challenging. We needed to render them inside our website to allow for switching display modes, which meant using an iframe. Unfortunately, most websites send <Code>X-Frame-Options</Code> and <Code>CORS</Code> headers which restrict display in iframes (bummer!). 
+                        </p>
+                        <p className="text-s pl-4 pr-4 indent-4">
+                            To work around these limitations, we developed a simple forward proxy to run locally. This proxy would receive the requested domain name as a subdomain on localhost (eg: <Code>google.com.localhost:3000/path</Code>), fetch it, and return the response (after stripping the relevant headers and rewriting any <Code>Set-Cookie</Code> headers). Supplying the target domain as a subdomain was necessary to ensure that relative paths worked correctly.
+                        </p>
+                    </div>
 
-            <div className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
-                <h2 className="font-bold">Security</h2>
-                <p className="text-s pl-4 pr-4 indent-4">
-                    As this screen is prominently displayed in store, avoiding unauthorized access was a key concern. The Raspberry Pi running the system was on a network that should remain unavailable to customers, but we wanted a second layer of defense. While setup for SSL (with DNS-backed certificates and an NGINX reverse proxy) was completed, this couldn't be deployed as we did not have access to DNS records at the time. This forced us to switch from OAuth/Google to HTTP basic authentication, however we still felt this was strong enough when combined with the network isolation.
-                </p>
+                    <div className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
+                        <h2 className="font-bold">Security</h2>
+                        <p className="text-s pl-4 pr-4 indent-4">
+                            As this screen is prominently displayed in store, avoiding unauthorized access was a key concern. The Raspberry Pi running the system was on a network that should remain unavailable to customers, but we wanted a second layer of defense. While setup for SSL (with DNS-backed certificates and an NGINX reverse proxy) was completed, this couldn't be deployed as we did not have access to DNS records at the time. This forced us to switch from OAuth/Google to HTTP basic authentication, however we still felt this was strong enough when combined with the network isolation.
+                        </p>
+                    </div>
+                </div>
+                <FitImg fitTo={ webRef } src="/assets-capstone/dashboard.png" className='w-min h-min border-1 p-3 box-border' />
             </div>
 
 
