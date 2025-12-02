@@ -3,7 +3,7 @@ import { CapstonePost } from './post_capstone';
 
 export interface IPost {
     title: string,
-    contents: ReactElement
+    contents: any; //ReactElement
 }
 
 export const Posts: Record<string, IPost> = {
