@@ -17,7 +17,7 @@ function RenderCapstonePost(): ReactElement {
     const webRef = useRef(null);
 
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 max-w-full overflow-x-hidden">
 
             <div className="flex landscape:flex-row portrait:flex-col-reverse gap-5">
                 <div className="flex flex-col gap-5 flex-1" ref={ bgFeatRef }>
@@ -50,6 +50,8 @@ function RenderCapstonePost(): ReactElement {
 
             <div className="flex landscape:flex-row portrait:flex-col gap-5">
                 <FitImg fitTo={ noticeboardRef } src="/assets-capstone/noticeboard.png" className='w-min h-min border-1 p-3 box-border portrait:w-full min-h-[200px]' />
+                <FitImg fitTo={ noticeboardRef } src="/assets-capstone/noticeboard-control.png" className='w-min h-min border-1 p-3 box-border portrait:w-full min-h-[200px]' />
+
                 <div ref={ noticeboardRef } className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
                     <h2 className="font-bold">Community Noticeboard</h2>
                     <p className="text-s pl-4 pr-4 indent-4">
@@ -83,7 +85,7 @@ function RenderCapstonePost(): ReactElement {
                         </p>
                     </div>
                 </div>
-                <FitImg fitTo={ webRef } src="/assets-capstone/dashboard.png" className='w-min h-min border-1 p-3 box-border' />
+                <FitImg fitTo={ webRef } src="/assets-capstone/dashboard.png" className='w-min h-min border-1 p-3 box-border landscape:max-w-[35vw] object-contain' />
             </div>
 
 
