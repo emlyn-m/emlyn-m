@@ -55,7 +55,7 @@ function RenderCapstonePost(): ReactElement {
                                 A requirement of my degree was the development of a non-trivial software project for an industry client.  For this, we chose to develop a control panel for TERRAINs vertical display screen (initially developed by <a href="https://trentcrawford.net" className="underline">Trent Cawford</a>).  This screen was initially designed to show the most recent videos uploaded to YouTube matching particular search parameters, however the  clients hoped that it could also be used as a general display screen for events and presentations.
                             </p>
                             <p className="text-s pl-4 pr-4 indent-4">
-                                body-bg-2
+                                As an additional project, we were asked to develop a digital Community Noticeboard for the display screen. This needed to be able to 
                             </p>
                         </div>
                     </div>
@@ -67,7 +67,6 @@ function RenderCapstonePost(): ReactElement {
                             <li>• Real-time control</li>
                             <li>• Automatic startup</li>
                             <li>• Automatic downloading/purging of YouTube videos</li>
-                            <li>• f5</li>
                         </ul>
                     </div>
 
@@ -77,7 +76,7 @@ function RenderCapstonePost(): ReactElement {
             </div>
 
             <div className="flex landscape:flex-row portrait:flex-col gap-5">
-                <FitImg fitTo={section2Ref} src="/assets-capstone/noticeboard.webp" className='w-min h-min border-1 p-3 box-border portrait:w-full' />
+                <FitImg fitTo={section2Ref} src="/assets-capstone/noticeboard.webp" className='w-min h-min border-1 p-3 box-border portrait:w-full min-h-[200px]' />
                 <div ref={ section2Ref } className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
                     <h2 className="font-bold">Community Noticeboard</h2>
                     <p className="text-s pl-4 pr-4 indent-4">
