@@ -22,9 +22,7 @@ function FitImg(props: {src: string, className?: string, fitTo: RefObject<HTMLDi
         
             const targetHeight = (props.fitTo.current as HTMLImageElement).clientHeight;        
             
-            if (window.innerHeight > window.innerWidth) {
-                (imgRef.current as HTMLImageElement).style.maxHeight = `${targetHeight}px`;
-            } else {
+            if (window.innerHeight < window.innerWidth) {
                 (imgRef.current as HTMLImageElement).style.height = `${targetHeight}px`;
             }
             (imgRef.current as HTMLImageElement).style.display = 'block';
@@ -32,7 +30,7 @@ function FitImg(props: {src: string, className?: string, fitTo: RefObject<HTMLDi
         resizeObserver.observe(props.fitTo.current);
         return () => resizeObserver.disconnect();
 
-    }, [ props.fitTo, props.fitTo.current?.clientHeight ]);
+    }, [ props.fitTo ]);
 
     return (
         <img ref={imgRef} className={props.className} src={ props.src } style={{ display: 'none' }}/>
@@ -79,7 +77,7 @@ function RenderCapstonePost(): ReactElement {
             </div>
 
             <div className="flex landscape:flex-row portrait:flex-col gap-5">
-                <FitImg fitTo={section2Ref} src="/assets-capstone/dashboard-full.webp" className='w-min h-min border-1 p-3 box-border' />
+                <FitImg fitTo={section2Ref} src="/assets-capstone/noticeboard.webp" className='w-min h-min border-1 p-3 box-border portrait:w-full' />
                 <div ref={ section2Ref } className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
                     <h2 className="font-bold">Community Noticeboard</h2>
                     <p className="text-s pl-4 pr-4 indent-4">
@@ -89,7 +87,7 @@ function RenderCapstonePost(): ReactElement {
             </div>
 
 
-            <div className="flex landscape:flex-row portrait:flex-col gap-5">
+            <div className="flex landscape:flex-row portrait:flex-col-reverse gap-5">
                 <div ref={ section3Ref } className="border-1 p-2 font-mono flex-1 flex flex-col gap-2">
                     <h2 className="font-bold">External Websites</h2>
                     <p className="text-s pl-4 pr-4 indent-4">
