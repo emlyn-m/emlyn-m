@@ -1,39 +1,12 @@
 'use client';
 
-import { ReactElement, RefObject, useEffect, useRef } from 'react';
+import { ReactElement, useRef } from 'react';
 import { IPost } from './posts';
+import { FitImg } from '@/app/components/fit_img';
 
 function Code(props: { children: string }): ReactElement {
     return (
         <span className="border-1 p-[.1rem]">{ props.children }</span>
-    )
-}
-
-function FitImg(props: {src: string, className?: string, fitTo: RefObject<HTMLDivElement|null>}): ReactElement {
-
-    const imgRef = useRef(null);
-
-
-    useEffect(() => {
-        if (!props.fitTo.current) return;
-
-        const resizeObserver = new ResizeObserver(() => {
-            if (!imgRef.current) { return; }
-        
-            const targetHeight = (props.fitTo.current as HTMLImageElement).clientHeight;        
-            
-            if (window.innerHeight < window.innerWidth) {
-                (imgRef.current as HTMLImageElement).style.height = `${targetHeight}px`;
-            }
-            (imgRef.current as HTMLImageElement).style.display = 'block';
-        });
-        resizeObserver.observe(props.fitTo.current);
-        return () => resizeObserver.disconnect();
-
-    }, [ props.fitTo ]);
-
-    return (
-        <img ref={imgRef} className={props.className} src={ props.src } style={{ display: 'none' }}/>
     )
 }
 
