@@ -106,9 +106,7 @@ async function configureRenderer(sceneRef: HTMLDivElement|null, props: Wireframe
         renderer.setSize(width, height);
 
         renderer.domElement.style.width = `${newWidth}px`;
-        renderer.domElement.style.height = `${newHeight}px`;
-        renderer.domElement.style.border = '10px solid red !important;';
-        
+        renderer.domElement.style.height = `${newHeight}px`;        
 
     }, false);
 
