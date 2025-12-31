@@ -20,7 +20,7 @@ export default function Home() {
 
 				<div className="h-full w-full border-1 p-5">
 					<div className="flex flex-row justify-between flex-wrap gap-5 items-start">
-						<span className="text-xl font-mono border-b-1 border-black pl-[.5rem] pr-[.5rem] h-[1.8rem]">about me</span>
+						<span className="text-xl font-header border-b-1 border-black pl-[.5rem] pr-[.5rem] h-[1.8rem]">about me</span>
 						<div className="flex flex-row gap-2">
 							<Button href={PersonalInfoConfig.links.cv} target="_blank">
 								<div className="flex flex-row items-center"> 
@@ -48,7 +48,7 @@ export default function Home() {
 				</div>
 
 				<div className="h-full w-full border-1 p-5 flex flex-col gap-4">
-					<span className="text-xl font-mono border-b-1 border-black w-min pl-[.5rem] pr-[.5rem]">projects</span>
+					<span className="text-xl font-header border-b-1 border-black w-min pl-[.5rem] pr-[.5rem]">projects</span>
 					<div className="m-3 gap-5 flex landscape:flex-row portrait:flex-col h-full">
 						{ ProjectConfig.projects.map((proj, i) => (
 							<Button className="p-2 flex-1" href={ proj.link } key={`proj-${i}`}>

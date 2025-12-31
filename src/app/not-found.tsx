@@ -1,5 +1,9 @@
+import { Metadata } from 'next';
 import Button from './components/button';
 
+export const metadata: Metadata = {
+    title: '404 | Emlyn Matheson',
+}
 export default function NotFound() {
 
     return (<div className="w-full h-full p-5 flex flex-row">

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300..700&display=swap');
 @import "tailwindcss";
 
 @custom-variant hover (&:hover);
@@ -12,10 +14,10 @@
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
+	--font-header: "Overpass Mono", var(--font-geist-mono);
 }
 
 body {
 	background: var(--background);
 	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
 }
