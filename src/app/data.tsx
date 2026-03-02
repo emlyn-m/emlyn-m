@@ -8,8 +8,7 @@ export const PersonalInfoConfig = {
     title: "Emlyn Matheson (she/her) | Melbourne",
     bullets: [
         "Software dev",
-        "Recent Graduate",
-        "Hiring? Let's chat!"
+        "Recent Graduate"
     ]
 };
 
